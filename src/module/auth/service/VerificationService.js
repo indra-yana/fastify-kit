@@ -9,7 +9,7 @@ module.exports = class VerificationService extends BaseService {
         super(fastify);
         this._User = fastify.objection.models.User;
 
-        this.LINK_EXPIRE_MINUTES = 25;  // 25 Minutes
+        this.LINK_EXPIRE_MINUTES = 60;  // 60 Minutes
     }
 
     /**
