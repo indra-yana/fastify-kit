@@ -36,7 +36,7 @@ module.exports = class RegisterService extends BaseService {
             password: hashedPassword,
         };
 
-        const result = await this._user.query()
+        const result = await this._User.query()
             .insert(newUser)
             .catch((error) => ({ error }));
 
@@ -53,7 +53,7 @@ module.exports = class RegisterService extends BaseService {
 
         return {
             user,
-            token,
+            ...token,
         };
     }
 
@@ -65,7 +65,7 @@ module.exports = class RegisterService extends BaseService {
      */
     async checkIfUsernameOrEmailExists(field = 'email', value = null) {
         const tags = ['RegisterService', '@checkIfUsernameOrEmailExists'];
-        const result = await this._user.query()
+        const result = await this._User.query()
             .select('username', 'email')
             .where(field, value);
 

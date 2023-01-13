@@ -5,7 +5,7 @@ const { joiValidationFormat } = require('../utils/utils');
 class BaseValidator {
     constructor(fastify) {
         this._fastify = fastify;
-        this._t = fastify.t;
+        this._t = fastify.Lang.t;
         this._Joi = fastify.Joi;
     }
 

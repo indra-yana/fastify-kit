@@ -24,7 +24,7 @@ function response(fastify, opts, done) {
     });
 
     fastify.decorateReply('error', function (args) {
-        return this.code(args.statusCode || 500).send(error(args, { error: args.error }));
+        return this.code(args.statusCode || 500).send(error(args, { errorBag: args.error }));
     });
 
     done();
