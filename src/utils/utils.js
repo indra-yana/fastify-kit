@@ -131,6 +131,10 @@ const isObject = (item) => {
     return item && typeof item === 'object' && !Array.isArray(item);
 };
 
+const isEmpty = (data) => {
+    return Array.isArray(data) ? data.length > 0 : Object.keys(data || {}).length !== 0;
+}
+
 const chunkArray = (arr, chunk) => {
     let i;
     let j;
@@ -208,6 +212,7 @@ module.exports = {
     isFunction,
     isAsyncFunction,
     isObject,
+    isEmpty,
     toCamelCase,
     ucfirst,
     lcfirst,

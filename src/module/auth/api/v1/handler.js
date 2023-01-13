@@ -1,4 +1,4 @@
-const { filePathFormat } = require('../../../../utils/utils');
+const { filePathFormat, isEmpty } = require('../../../../utils/utils');
 
 class AuthHandler {
 
@@ -51,7 +51,7 @@ class AuthHandler {
             const result = await this._registerService.register(payloads);
             result.user.avatar = null;
             
-            if (Object.keys(data).length !== 0) {
+            if (!isEmpty(data)) {
                 const fileName = await this._storageService.writeFile(data, 'uploads/avatar');
                 await this._registerService.updateAvatar(result.user.id, fileName);
                 result.user.avatar = filePathFormat(fileName, 'avatar');
