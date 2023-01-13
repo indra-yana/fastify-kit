@@ -132,7 +132,7 @@ const isObject = (item) => {
 };
 
 const isEmpty = (data) => {
-    return Array.isArray(data) ? data.length > 0 : Object.keys(data || {}).length !== 0;
+    return Array.isArray(data) ? data.length === 0 : Object.keys(data || {}).length === 0;
 }
 
 const chunkArray = (arr, chunk) => {

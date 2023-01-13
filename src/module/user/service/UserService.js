@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const InvariantException = require('../../../exceptions/InvariantException');
 const NotFoundException = require('../../../exceptions/NotFoundException');
 const QueryException = require('../../../exceptions/QueryException');
+const ValidationException = require('../../../exceptions/ValidationException');
 
 module.exports = class UserService extends BaseService {
 
@@ -191,6 +192,60 @@ module.exports = class UserService extends BaseService {
         }
 
         return result.id;
+    }
+
+    /**
+     * Check if username or email already been exist
+     * 
+     * @param {string} field 
+     * @param {*} value 
+     */
+    async checkIfUsernameOrEmailExists(field = 'email', value = null) {
+        const tags = ['UserService', '@checkIfUsernameOrEmailExists'];
+        const result = await this._User.query()
+            .select('username', 'email')
+            .where(field, value);
+
+        if (result.length > 0) {
+            throw new ValidationException({
+                message: this._t('message.validation_fail'),
+                error: joiValidationFormat([
+                    {
+                        path: [field],
+                        message: this._t('validation.unique', { attribute: field }),
+                    },
+                ]),
+                tags,
+            });
+        }
+    }
+
+    /**
+     * Check if user can be updated
+     * 
+     * @param {string} field 
+     * @param {*} value 
+     */
+    async checkUniqueField(field = 'email', data = {}) {
+        const tags = ['UserService', '@checkUniqueField'];
+        const result = await this._user.query()
+                                .select('username', 'email')
+                                .where(field, data.value)
+                                .whereNot('id', data.id)
+                                .returning('*');
+
+        if (result.length > 0) {
+            throw new ValidationException({ 
+                message: this._t('message.validation_fail'), 
+                error: joiValidationFormat([
+                    {
+                        path: [field],
+                        message: this._t('validation.unique', { attribute: field }),
+                    },
+                ]),
+                tags,
+            });
+        }
     }
 
 }
