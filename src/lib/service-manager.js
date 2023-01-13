@@ -6,6 +6,7 @@ const RegisterService = require('../module/auth/service/RegisterService');
 const VerificationService = require('../module/auth/service/VerificationService');
 const MailerService = require('../module/mailer/service/MailerService');
 const StorageService = require('../module/storage/service/StorageService');
+const UserService = require('../module/user/service/UserService');
 
 function serviceManager(fastify, opts = {}, done) {
     // Register all service here from dir: ./module/module-name/service
@@ -15,6 +16,7 @@ function serviceManager(fastify, opts = {}, done) {
     const registerService = new RegisterService({ fastify });
     const forgotPasswordService = new ForgotPasswordService({ fastify });
     const verificationService = new VerificationService({ fastify });
+    const userService = new UserService({ fastify });
 
     const services = {
         mailer: mailerService,
@@ -23,6 +25,7 @@ function serviceManager(fastify, opts = {}, done) {
         register: registerService,
         forgot: forgotPasswordService,
         verification: verificationService,
+        user: userService,
     };
 
     const ServiceManager = {

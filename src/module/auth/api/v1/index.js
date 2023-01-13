@@ -11,9 +11,9 @@ function api(fastify, opts = {}, done) {
     const verificationService = fastify.Service.get('verification');
     const validator = new AuthValidator({ fastify });
 
-    const authHandler = new AuthHandler(mailerService, storageService, loginService, registerService, forgotPasswordService, verificationService, validator);
+    const handler = new AuthHandler(mailerService, storageService, loginService, registerService, forgotPasswordService, verificationService, validator);
 
-    routes(fastify, { handler: authHandler }).forEach((route) => {
+    routes(fastify, { handler }).forEach((route) => {
         fastify.route(route);
     });
 
