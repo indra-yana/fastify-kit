@@ -1,8 +1,9 @@
 const fp = require('fastify-plugin');
+const authModule = require('../module/auth');
 
 function moduleManager(fastify, opts, done) {
     // Register all module here from dir: ./module
-    // fastify.register('modul');
+    fastify.register(authModule);
 
     done();
 }

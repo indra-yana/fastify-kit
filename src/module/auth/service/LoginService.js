@@ -86,27 +86,8 @@ module.exports = class LoginService extends BaseService {
 
         return {
             user,
-            token,
+            ...token,
         };
-    }
-
-    /**
-     * Update user avatar 
-     * 
-     * @param {*} id 
-     * @param {*} fileName 
-     * @returns {string}
-     */
-    async updateAvatar(id, fileName) {
-        const updatedUser = {
-            avatar: fileName,
-        };
-
-        const result = await this._User.query()
-            .findById(id)
-            .patch(updatedUser);
-
-        return result.avatar;
     }
 
     /**

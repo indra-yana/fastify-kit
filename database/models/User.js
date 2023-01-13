@@ -2,7 +2,7 @@
 const { Model } = require('objection');
 const ObjectionModel = require('../../src/lib/model');
 
-class User extends ObjectionModel {
+module.exports = class User extends ObjectionModel() {
 	/**
 	 * Table name is the only required property.
 	 */
@@ -28,5 +28,3 @@ class User extends ObjectionModel {
 	}
 	
 }
-
-module.exports = User;

@@ -1,6 +1,8 @@
 const fp = require('fastify-plugin');
 const knexConnection = require('./knex');
 const User = require('../../database/models/User');
+const File = require('../../database/models/File');
+const Role = require('../../database/models/Role');
 
 function objectionORM(fastify, opts, done) {
     const connection = knexConnection();
@@ -14,6 +16,8 @@ function objectionORM(fastify, opts, done) {
     if (!opts.model) {
         opts.models = [
             User,
+            Role,
+            File,
         ];
     }
 

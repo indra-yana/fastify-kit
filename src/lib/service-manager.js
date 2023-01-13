@@ -1,10 +1,28 @@
 const fp = require('fastify-plugin');
-const AuthService = require('../module/auth/service/AuthService');
+const path = require('path');
+const ForgotPasswordService = require('../module/auth/service/ForgotPasswordService');
+const LoginService = require('../module/auth/service/LoginService');
+const RegisterService = require('../module/auth/service/RegisterService');
+const VerificationService = require('../module/auth/service/VerificationService');
+const MailerService = require('../module/mailer/service/MailerService');
+const StorageService = require('../module/storage/service/StorageService');
 
 function serviceManager(fastify, opts = {}, done) {
     // Register all service here from dir: ./module/module-name/service
+    const mailerService = new MailerService();
+    const storageService = new StorageService(path.resolve('../public'), { fastify });
+    const loginService = new LoginService({ fastify });
+    const registerService = new RegisterService({ fastify });
+    const forgotPasswordService = new ForgotPasswordService({ fastify });
+    const verificationService = new VerificationService({ fastify });
+
     const services = {
-        auth: new AuthService(),
+        mailer: mailerService,
+        storage: storageService,
+        login: loginService,
+        register: registerService,
+        forgot: forgotPasswordService,
+        verification: verificationService,
     };
 
     const ServiceManager = {

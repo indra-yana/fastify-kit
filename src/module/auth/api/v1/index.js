@@ -3,12 +3,15 @@ const AuthHandler = require('./handler');
 const routes = require('./routes');
 
 function api(fastify, opts = {}, done) {
-    const authService = fastify.Service.get('atuh');
     const mailerService = fastify.Service.get('mailer');
     const storageService = fastify.Service.get('storage');
-    const validator = new AuthValidator();
+    const loginService = fastify.Service.get('login');
+    const registerService = fastify.Service.get('register');
+    const forgotPasswordService = fastify.Service.get('forgot');
+    const verificationService = fastify.Service.get('verification');
+    const validator = new AuthValidator({ fastify });
 
-    const authHandler = new AuthHandler(authService, mailerService, storageService, validator);
+    const authHandler = new AuthHandler(mailerService, storageService, loginService, registerService, forgotPasswordService, verificationService, validator);
 
     routes(fastify, { handler: authHandler }).forEach((route) => {
         fastify.route(route);

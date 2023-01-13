@@ -2,7 +2,7 @@
 const { Model } = require('objection');
 const ObjectionModel = require('../../src/lib/model');
 
-class Role extends ObjectionModel {
+class Role extends ObjectionModel() {
 	/**
 	 * Table name is the only required property.
 	 */
