@@ -1,6 +1,7 @@
 const { generateToken } = require('../../../lib/tokenize');
 const { joiValidationFormat, mapUserFormat } = require('../../../utils/utils');
 const { validateEmail } = require('filter-validate-email');
+const AuthenticationException = require('../../../exceptions/AuthenticationException');
 const BaseService = require('../../../lib/BaseService');
 const bcrypt = require('bcrypt');
 const NotFoundException = require('../../../exceptions/NotFoundException');
@@ -101,8 +102,8 @@ module.exports = class LoginService extends BaseService {
         };
 
         const result = await this._User.query()
-                                .findById(id)
-                                .patch(updatedUser);
+            .findById(id)
+            .patch(updatedUser);
 
         return result.avatar;
     }
@@ -146,4 +147,33 @@ module.exports = class LoginService extends BaseService {
 
         return generateToken(this._jwt, user);
     }
+
+    /**
+     * Password confirmation
+     * 
+     * @param {*} data 
+     * @returns {void}
+     */
+    async confirmPassword(id, password) {
+        const tags = ['LoginService', '@confirmPassword'];
+        const user = await this._User.query().findById(id);
+        if (!user) {
+            throw new NotFoundException({ message: this._t('message.data_notfound'), tags });
+        }
+
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) {
+            throw new AuthenticationException({
+                message: this._t('password.incorrect'),
+                error: joiValidationFormat([
+                    {
+                        path: ['password'],
+                        message: this._t('auth.password'),
+                    },
+                ]),
+                tags,
+            });
+        }
+    }
+
 }
