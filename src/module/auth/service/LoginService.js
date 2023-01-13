@@ -93,7 +93,8 @@ module.exports = class LoginService extends BaseService {
     /**
      * Update user avatar 
      * 
-     * @param {*} data 
+     * @param {*} id 
+     * @param {*} fileName 
      * @returns {string}
      */
     async updateAvatar(id, fileName) {
@@ -151,7 +152,8 @@ module.exports = class LoginService extends BaseService {
     /**
      * Password confirmation
      * 
-     * @param {*} data 
+     * @param {*} id 
+     * @param {*} password 
      * @returns {void}
      */
     async confirmPassword(id, password) {
