@@ -1,6 +1,6 @@
 const BaseValidator = require('../../../lib/BaseValidator');
 
-class AuthValidator extends BaseValidator {
+module.exports = class AuthValidator extends BaseValidator {
 
     constructor({ fastify }) {
         super(fastify);
@@ -101,5 +101,3 @@ class AuthValidator extends BaseValidator {
     }
     
 }
-
-module.exports = AuthValidator;
