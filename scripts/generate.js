@@ -5,13 +5,7 @@ const { existsSync, writeSync, readSync, openSync } = require('fs')
 const path = require('path');
 const readline = require('readline');
 const shell = require('shelljs');
-
-const {
-	generateApiModTemplate,
-	generateServiceModTemplate,
-	generateValidatorModTemplate,
-	generateIndexModTemplate
-} = require('./module-generator');
+const generateModule = require('./module-generator');
 
 const baseDir = path.dirname(__dirname);
 shell.config.silent = true;
@@ -64,10 +58,7 @@ const generate = (_dir, name, type = 'module') => {
 
 			switch (type) {
 				case 'module':
-					generateIndexModTemplate($dir, name);
-					generateApiModTemplate($dir, name);
-					generateServiceModTemplate($dir, name);
-					generateValidatorModTemplate($dir, name);
+					generateModule($dir, name);
 					break;
 				default:
 					shell.echo('Command type is invalid');

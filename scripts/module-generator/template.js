@@ -1,5 +1,5 @@
 const { html } = require('common-tags');
-const { toTitleCase } = require('../src/utils/utils');
+const { toTitleCase } = require('../../src/utils/utils');
 const fs = require('fs');
 const path = require('path');
 const shell = require('shelljs');
