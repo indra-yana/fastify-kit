@@ -5,7 +5,7 @@ const File = require('../../database/models/File');
 const Role = require('../../database/models/Role');
 
 function objectionORM(fastify, opts, done) {
-    const connection = knexConnection();
+    // const connection = knexConnection();
     const config = {
         decoratorName: 'objection',
         ...opts,
@@ -22,7 +22,7 @@ function objectionORM(fastify, opts, done) {
     }
 
     const objection = {
-        knex: connection,
+        // knex: connection,
         models: opts.models,
     };
 
@@ -54,7 +54,7 @@ function objectionORM(fastify, opts, done) {
     }
 
     fastify.addHook('onClose', (_, next) => {
-        connection.destroy();
+        // connection.destroy();
         next();
     });
 
