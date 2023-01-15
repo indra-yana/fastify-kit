@@ -4,6 +4,7 @@ const ForgotPasswordService = require('../module/auth/service/ForgotPasswordServ
 const LoginService = require('../module/auth/service/LoginService');
 const RegisterService = require('../module/auth/service/RegisterService');
 const VerificationService = require('../module/auth/service/VerificationService');
+const FileService = require('../module/file/service/FileService');
 const MailerService = require('../module/mailer/service/MailerService');
 const RoleService = require('../module/role/service/RoleService');
 const StorageService = require('../module/storage/service/StorageService');
@@ -12,13 +13,14 @@ const UserService = require('../module/user/service/UserService');
 function serviceManager(fastify, opts = {}, done) {
     // Register all service here from dir: ./module/module-name/service
     const mailerService = new MailerService();
-    const storageService = new StorageService(path.resolve('../public'), { fastify });
+    const storageService = new StorageService({ fastify });
     const loginService = new LoginService({ fastify });
     const registerService = new RegisterService({ fastify });
     const forgotPasswordService = new ForgotPasswordService({ fastify });
     const verificationService = new VerificationService({ fastify });
     const userService = new UserService({ fastify });
     const roleService = new RoleService({ fastify });
+    const fileService = new FileService({ fastify });
 
     const services = {
         mailer: mailerService,
@@ -29,6 +31,7 @@ function serviceManager(fastify, opts = {}, done) {
         verification: verificationService,
         user: userService,
         role: roleService,
+        file: fileService,
     };
 
     const ServiceManager = {

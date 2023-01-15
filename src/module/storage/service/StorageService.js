@@ -7,10 +7,12 @@ const { pipeline } = require('stream');
 
 module.exports = class StorageService extends BaseService {
 
-    constructor(rootFolder, { fastify }) {
+    constructor({ fastify }) {
         super(fastify);
-        this._rootFolder = rootFolder;
-        this.createFolder(rootFolder);
+
+        const root = path.resolve('public');
+        this._rootFolder = root;
+        this.createFolder(root);
     }
 
     /**

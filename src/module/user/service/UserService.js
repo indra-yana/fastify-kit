@@ -228,7 +228,7 @@ module.exports = class UserService extends BaseService {
      */
     async checkUniqueField(field = 'email', data = {}) {
         const tags = ['UserService', '@checkUniqueField'];
-        const result = await this._user.query()
+        const result = await this._User.query()
                                 .select('username', 'email')
                                 .where(field, data.value)
                                 .whereNot('id', data.id)

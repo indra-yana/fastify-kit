@@ -3,8 +3,10 @@ const path = require('path');
 const fastifyStatic = require('@fastify/static');
 
 function staticFile(fastify, opts = {}, done) {
+	const baseDir = path.dirname(__dirname);
+
 	fastify.register(fastifyStatic, {
-		root: path.join(`${__dirname}../../`),
+		root: path.join(`${baseDir}../../`),
 		prefix: '/',
 		wildcard: true,
 	});
