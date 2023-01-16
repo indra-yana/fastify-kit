@@ -22,7 +22,7 @@ module.exports = class UserService extends BaseService {
      */
     async create(data) {
         const tags = ['UserService', '@create'];
-        const { name, username, email, password, avatar = {} } = data;
+        const { name, username, email, password, avatar = null } = data;
 
         await this.checkIfUsernameOrEmailExists('username', username);
         await this.checkIfUsernameOrEmailExists('email', email);
@@ -32,13 +32,12 @@ module.exports = class UserService extends BaseService {
             name,
             username,
             email,
-            avatar: Object.keys(avatar).length !== 0 ? avatar : null,
+            // avatar,
             password: hashedPassword,
         };
 
         const result = await this._User.query()
             .insert(newUser)
-            .returning('*')
             .catch((error) => ({ error }));
 
         if (result.error) {
@@ -61,9 +60,9 @@ module.exports = class UserService extends BaseService {
      */
     async update(id, data) {
         const tags = ['UserService', '@update'];
-        const { name, username, email, avatar = {} } = data;
+        const { name, username, email } = data;
 
-        await this.show(id);
+        // await this.show(id);
         await this.checkUniqueField('username', { id, value: username });
         await this.checkUniqueField('email', { id, value: email });
 
@@ -71,8 +70,9 @@ module.exports = class UserService extends BaseService {
             name,
             username,
             email,
-            avatar: Object.keys(avatar).length !== 0 ? avatar : null,
+            // avatar,
         };
+        console.log(id, updatedUser);
 
         const result = await this._User.query()
             .findById(id)
@@ -105,8 +105,7 @@ module.exports = class UserService extends BaseService {
 
         const result = await this._User.query()
             .findById(id)
-            .patch(updatedUser)
-            .returning('avatar');
+            .patch(updatedUser);
 
         return result.avatar;
     }

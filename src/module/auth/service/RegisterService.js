@@ -22,7 +22,7 @@ module.exports = class RegisterService extends BaseService {
      */
     async register(data) {
         const tags = ['RegisterService', '@register'];
-        const { name, username, email, password, avatar = {} } = data;
+        const { name, username, email, password, avatar = null } = data;
 
         await this.checkIfUsernameOrEmailExists('username', username);
         await this.checkIfUsernameOrEmailExists('email', email);
@@ -32,7 +32,7 @@ module.exports = class RegisterService extends BaseService {
             name,
             username,
             email,
-            avatar: Object.keys(avatar).length !== 0 ? avatar : null,
+            // avatar,
             password: hashedPassword,
         };
 

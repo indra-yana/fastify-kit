@@ -29,7 +29,7 @@ module.exports = class UserHandler {
             result.avatar = null;
 
             if (!isEmpty(data)) {
-                const fileName = await this._storageService.writeFile(data, 'public/uploads/avatar');
+                const fileName = await this._storageService.writeFile(data, 'uploads/avatar');
                 await this._userService.updateAvatar(result.id, fileName);
                 result.avatar = filePathFormat(fileName, 'avatar');
             }
