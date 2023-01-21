@@ -97,7 +97,8 @@ module.exports = class VerificationService extends BaseService {
         const updatedAt = new Date().toISOString();
         const result = await this._User.query()
             .findById(user.id)
-            .patch({ email_verified_at: updatedAt });
+            .patch({ email_verified_at: updatedAt })
+            .returning('*');
 
         if (!result) {
             throw new NotFoundException({ message: this._t('message.data_notfound'), tags });
