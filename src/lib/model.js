@@ -22,9 +22,7 @@ function ObjectionModel() {
          * @param {*} context
          */
         $beforeUpdate(opt, context) {
-            if (this.updated_at) {
-                this.updated_at = new Date().toISOString();
-            }
+            this.updated_at = new Date().toISOString();
         }
     };
 }
