@@ -72,7 +72,6 @@ module.exports = class UserService extends BaseService {
             email,
             // avatar,
         };
-        console.log(id, updatedUser);
 
         const result = await this._User.query()
             .findById(id)

@@ -59,7 +59,7 @@ module.exports = class UserHandler {
 
             const { id } = payloads;
             const result = await this._userService.update(id, payloads);
-            result.avatar = null;
+            // result.avatar = result.avatar ? filePathFormat(result.avatar, 'avatar') : null;
 
             if (!isEmpty(data)) {
                 const fileName = await this._storageService.writeFile(data, 'uploads/avatar');
