@@ -3,30 +3,108 @@
 a REST API project with Fastify JS Starter Kit. 
 This project is purposed for building your awesome app that needed a starting point with basic fitur that listed bellow:
 
-<ul>
-    <li>Basic Authentication
-        <ul>
-            <li>Login</li>
-            <li>Register</li>
-            <li>Forgot Password</li>
-            <li>Verify Account</li>
-            <li>Password Confirmation</li>
-        </ul>
-    </li>
-    <li>User Management (CRUD)</li>
-    <li>Role Management (CRUD)</li>
-</ul>
-<p>Core feature included in this project:</p>
-<ul>
-    <li>Fastify v4.11.x</li>
-    <li>Fastify Auth</li>
-    <li>Fastify JWT</li>
-    <li>Potgres Database</li>
-    <li>Objection JS (ORM)</li>
-    <li>Knex (Query Builder and DB Manager)</li>
-    <li>Multi Language Using <a href="https://www.i18next.com" target="_blank">i18next</a> </li>
-    <li>Joi Validation</li>
-    <li>EJS (View Templating)</li>
-    <li>Node Mailer</li>
-    <li>and more</li>
-</ul>
+
+# Fitur
+- Basic Authentication
+    - Login
+    - Register
+    - Forgot Password
+    - Verify Account
+    - Password Confirmation
+- User Management (CRUD)
+- Role Management (CRUD)
+
+# Dependencies
+- Fastify v4.11.x
+- Fastify Auth
+- Fastify JWT
+- Potgres Database
+- Objection JS (ORM)
+- Knex (Query Builder and DB Manager)
+- Multi Language Using [i18next](https://www.i18next.com) 
+- Joi Validation
+- EJS (View Templating)
+- Node Mailer
+- and more
+
+# How to Install
+
+- Clone project 
+```sh 
+git clone https://github.com/indra-yana/fastify-kit.git
+``` 
+
+- Install node dependency
+
+```sh
+npm install
+```
+
+- Copy & setup environment
+
+```sh
+cp .env.example .env
+```
+
+- Migrate database 
+```sh
+npm run db migrate:latest
+```
+
+- Run Development Server
+
+```sh
+npm run dev
+```
+
+- Module Generator 
+
+```sh
+npm run generate:module modele_name
+```
+
+# API SPEC
+
+### Base URL :
+
+```sh
+http://localhost:3000
+```
+
+### General Header :
+
+```json
+{
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "X-Requested-With": "XMLHttpRequest",
+    "Accept-Language": "id",        // id|en
+    "Authorization": "bearer_token" // if authenticated
+}
+```
+
+### Response :
+
+Success Response :
+
+```json
+{
+    "statusCode": 200,
+    "message": "Success Message",
+    "data": {
+        "success_data"
+    }
+}
+```
+
+Error Response :
+
+```json
+{
+    "statusCode": 500,
+    "message": "Error Message",
+    "error": {
+        "error_data"
+    }
+}
+```
