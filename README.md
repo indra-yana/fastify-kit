@@ -4,7 +4,7 @@ a REST API Starter Kit Project with [Fastify JS](https://www.fastify.io).
 
 This project is a starter kit project with basic features listed bellow:
 
-## Fitur
+## Features
 
 - Basic Authentication
     - Login
